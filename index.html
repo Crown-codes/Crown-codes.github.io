@@ -240,13 +240,29 @@ footer {
   transform: translateY(-12px) scale(1.03);
   box-shadow: 0 0 30px #00c6ff;
 }
+    /* ================= TYPING ANIMATION ================= */
+
+#typing {
+  border-right: 3px solid #00c6ff;
+  padding-right: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0% { border-color: transparent; }
+  50% { border-color: #00c6ff; }
+  100% { border-color: transparent; }
+}
+
 
   </style>
 </head>
 <body>
 
   <header>
-    <h1>KAIZEN</h1>
+    <h1><span id="typing"></span></h1>
     <p>Student | Developer | Learner</p>
   </header>
 
@@ -326,9 +342,23 @@ footer {
   window.addEventListener("scroll", revealOnScroll);
   revealOnScroll(); // trigger on load
 </script>
+  <script>
+  const text = "KAIZEN";
+  let index = 0;
+  const speed = 150; // typing speed (lower = faster)
+
+  function typeEffect() {
+    if (index < text.length) {
+      document.getElementById("typing").textContent += text.charAt(index);
+      index++;
+      setTimeout(typeEffect, speed);
+    }
+  }
+
+  typeEffect();
+</script>
+
 
 
 </body>
 </html>
-
-
