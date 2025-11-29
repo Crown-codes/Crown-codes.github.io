@@ -343,22 +343,46 @@ footer {
   revealOnScroll(); // trigger on load
 </script>
   <script>
-  const text = "KAIZEN";
-  let index = 0;
-  const speed = 150; // typing speed (lower = faster)
+const words = ["KAIZEN", "Developer", "Learner", "Student"];
+let wordIndex = 0;
+let charIndex = 0;
+let typingSpeed = 150; // milliseconds
+let deletingSpeed = 80;
+let pauseTime = 1000; // pause after full word
+const typingElement = document.getElementById("typing");
 
-  function typeEffect() {
-    if (index < text.length) {
-      document.getElementById("typing").textContent += text.charAt(index);
-      index++;
-      setTimeout(typeEffect, speed);
-    }
+function typeLoop() {
+  const currentWord = words[wordIndex];
+
+  if (charIndex < currentWord.length) {
+    typingElement.textContent += currentWord.charAt(charIndex);
+    charIndex++;
+    setTimeout(typeLoop, typingSpeed);
+  } else {
+    // Word complete, pause, then delete
+    setTimeout(deleteLoop, pauseTime);
   }
+}
 
-  typeEffect();
+function deleteLoop() {
+  const currentWord = words[wordIndex];
+
+  if (charIndex > 0) {
+    typingElement.textContent = currentWord.substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(deleteLoop, deletingSpeed);
+  } else {
+    // Move to next word
+    wordIndex = (wordIndex + 1) % words.length;
+    setTimeout(typeLoop, typingSpeed);
+  }
+}
+
+// Start the typing loop
+typeLoop();
 </script>
-
 
 
 </body>
 </html>
+
