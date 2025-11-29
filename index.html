@@ -5,16 +5,208 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Personal Website</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; background-size: cover; color: #333; }
-    header {  background-color: #266;color: #fff;padding: 60px 20px;text-align: center;position: relative; }
-    header img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
-    nav { background: #333; padding: 12px; text-align: center; }
-    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-size: 18px; }
-    section { padding: 50px 20px; max-width: 900px; margin: auto; background: #fff; margin-top: 30px; border-radius: 8px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
-    h2 { border-bottom: 2px solid #ddd; padding-bottom: 8px; }
-    footer { text-align: center; padding: 20px; background: #222; color: #fff; margin-top: 40px; }
-    .skills span, .social a { background: #eee; padding: 8px 15px; margin: 5px; display: inline-block; border-radius: 20px; }
-    .social a { background: #333; color: #fff; }
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: linear-gradient(120deg, #f5f7fa, #c3cfe2);
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ================= HEADER ================= */
+
+header {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  padding: 80px 20px;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 48px;
+  letter-spacing: 3px;
+}
+
+header p {
+  margin-top: 10px;
+  font-size: 18px;
+  opacity: 0.9;
+}
+
+/* ================= NAVBAR ================= */
+
+nav {
+  background: #111;
+  padding: 12px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav a {
+  color: #fff;
+  margin: 0 18px;
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #00c6ff;
+}
+
+/* ================= SECTIONS ================= */
+
+section {
+  padding: 50px 25px;
+  max-width: 900px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transition: 0.3s;
+}
+
+section:hover {
+  transform: translateY(-3px);
+}
+
+h2 {
+  margin-bottom: 20px;
+  border-bottom: 3px solid #00c6ff;
+  display: inline-block;
+  padding-bottom: 6px;
+  font-size: 26px;
+}
+
+/* ================= ABOUT ================= */
+
+#about p {
+  font-size: 17px;
+}
+
+/* ================= SKILLS ================= */
+
+.skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.skills span {
+  background: linear-gradient(135deg, #00c6ff, #0072ff);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 25px;
+  font-size: 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.skills span:hover {
+  transform: scale(1.08);
+}
+
+/* ================= PROJECTS ================= */
+
+#projects ul {
+  margin-top: 15px;
+  padding-left: 20px;
+}
+
+#projects li {
+  margin-bottom: 12px;
+  font-size: 16px;
+}
+
+/* ================= CONTACT ================= */
+
+.social {
+  margin-top: 15px;
+}
+
+.social a {
+  display: inline-block;
+  background: #222;
+  color: #fff;
+  padding: 10px 18px;
+  margin: 8px 6px;
+  border-radius: 25px;
+  text-decoration: none;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.social a:hover {
+  background: #00c6ff;
+  color: #000;
+}
+
+/* ================= FOOTER ================= */
+
+footer {
+  text-align: center;
+  padding: 25px;
+  background: #111;
+  color: #fff;
+  margin-top: 60px;
+  font-size: 15px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 36px;
+  }
+
+  nav a {
+    display: inline-block;
+    margin: 8px 10px;
+    font-size: 16px;
+  }
+
+  section {
+    margin: 25px 15px;
+    padding: 40px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  header h1 {
+    font-size: 30px;
+  }
+
+  header p {
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+}
+    /* ================= SCROLL ANIMATION ================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
   </style>
 </head>
 <body>
@@ -31,19 +223,19 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <section id="about">
+  <section id="about" class="reveal">
     <h2>About Me</h2>
     <p>Hello! I'm Milan Kumar Das, a passionate learner and aspiring developer. I enjoy creating websites, learning new technologies, and building digital experiences. This is my personal website where I showcase my projects, skills, and contact details.</p>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="reveal">
     <h2>Skills</h2>
     <div class="skills">
       <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span><span>GitHub</span>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="reveal">
     <h2>Projects</h2>
     <p>Here are some of my favorite projects:</p>
     <ul>
@@ -53,7 +245,7 @@
     </ul>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="reveal">
     <h2>Contact</h2>
     <p>Feel free to reach me through the below platforms:</p>
     <div class="social">
@@ -67,20 +259,27 @@
   <footer>
     <p>&copy; 2025 Crown-Codes. All rights reserved.</p>
   </footer>
+  <script>
+  function revealOnScroll() {
+    const reveals = document.querySelectorAll(".reveal");
+
+    reveals.forEach((element) => {
+      const windowHeight = window.innerHeight;
+      const elementTop = element.getBoundingClientRect().top;
+      const revealPoint = 120;
+
+      if (elementTop < windowHeight - revealPoint) {
+        element.classList.add("active");
+      } else {
+        element.classList.remove("active");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll(); // trigger on load
+</script>
+
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
