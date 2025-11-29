@@ -250,6 +250,9 @@ footer {
   overflow: hidden;
   animation: blink 0.7s infinite;
 }
+    .kaizen {
+  animation: glow 1.5s infinite alternate;
+}
 
 @keyframes blink {
   0% { border-color: transparent; }
@@ -258,7 +261,7 @@ footer {
 }
     /* Special font for KAIZEN */
 .kaizen {
-  font-family: 'Dancing+Script', sans-serif;
+  font-family: 'Dancing Script', sans-serif;
   font-weight: 700;
   text-transform: uppercase;
   color: #00c6ff; /* glow color */
@@ -270,7 +273,7 @@ footer {
 <body>
 
   <header>
-    <h1><span id="typing"></span></h1>
+    <h1><span id="typing" class="kaizen"></span></h1>
     <p>Student | Developer | Learner</p>
   </header>
 
@@ -393,6 +396,7 @@ typeLoop();
 
 </body>
 </html>
+
 
 
 
