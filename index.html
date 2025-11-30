@@ -1,285 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Personal Website</title>
+<meta charset="UTF-8">
+<title>Kaizen Neon Site</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
 
 <style>
-:root{
---bg1:#00c6ff;
---bg2:#0072ff;
---bg3:#ff00cc;
---glass:rgba(255,255,255,0.12);
---text:#ffffff;
-}
-
-body.light{
---bg1:#ffffff;
---bg2:#dbeafe;
---bg3:#c7d2fe;
---glass:rgba(0,0,0,0.08);
---text:#000000;
-}
-
 *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
 
 body{
-font-family:"Segoe UI",Arial,sans-serif;
-color:var(--text);
-background:linear-gradient(270deg,var(--bg1),var(--bg2),var(--bg3),#3333ff);
-background-size:800% 800%;
-animation:neonFlow 12s ease infinite;
-transition:0.5s;
+  font-family:Segoe UI, sans-serif;
+  background:linear-gradient(270deg,#00c6ff,#0072ff,#ff00cc,#3333ff);
+  background-size:800% 800%;
+  animation:bg 15s infinite alternate;
+  color:#fff;
 }
 
-@keyframes neonFlow{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
+@keyframes bg{to{background-position:100% 50%}}
+
+canvas{position:fixed;inset:0;z-index:-1}
 
 /* LOADER */
-#loader{
-position:fixed;inset:0;background:#000;
-display:flex;flex-direction:column;
-justify-content:center;align-items:center;
-z-index:9999;transition:0.6s;
-}
-
-.loader-ring{
-width:100px;height:100px;
-border:8px solid rgba(255,255,255,0.1);
-border-top:8px solid #00c6ff;
-border-radius:50%;
-animation:spin 1s linear infinite;
-margin-bottom:20px;
-}
-
+#loader{position:fixed;inset:0;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999}
+.loader-ring{width:80px;height:80px;border-radius:50%;border:8px solid rgba(255,255,255,.1);border-top:8px solid #00c6ff;animation:spin 1s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-
-.loader-text{
-font-family:'Dancing Script',cursive;
-font-size:36px;
-letter-spacing:5px;
-color:#00c6ff;
-}
-
-/* PARTICLES */
-canvas#particleCanvas{
-position:fixed;top:0;left:0;z-index:-1
-}
+.loader-text{font-family:'Dancing Script',cursive;font-size:36px;margin-top:20px;color:#00c6ff;text-shadow:0 0 25px #00c6ff}
 
 /* HEADER */
-header{
-background:rgba(0,0,0,0.45);
-backdrop-filter:blur(12px);
-padding:80px 20px 60px;
-text-align:center;
-position:relative;
-}
+header{text-align:center;padding:80px 20px;background:rgba(0,0,0,.45);backdrop-filter:blur(12px)}
+#typing{font-size:48px;font-weight:bold;border-right:3px solid #00c6ff}
 
-header h1{font-size:48px}
+/* VISUALIZER */
+.visualizer{display:flex;gap:5px;justify-content:center;margin-top:15px;height:30px}
+.bar{width:5px;height:10px;background:#00c6ff;box-shadow:0 0 15px #00c6ff;transition:.1s}
 
-.kaizen{
-font-family:'Dancing Script',cursive;
-color:#00c6ff;
-}
-
-/* 🎶 HEADER VISUALIZER */
-.visualizer{
-display:flex;
-justify-content:center;
-align-items:flex-end;
-gap:6px;
-margin-top:15px;
-height:40px;
-}
-
-.bar{
-width:8px;
-height:10px;
-background:#00c6ff;
-border-radius:6px;
-box-shadow:0 0 10px #00c6ff;
-transition:height 0.1s linear;
-}
-
-/* NAVBAR */
-nav{
-background:rgba(0,0,0,0.4);
-backdrop-filter:blur(12px);
-padding:12px;
-text-align:center;
-position:sticky;
-top:0;
-z-index:1000;
-}
-
-nav a{
-color:var(--text);
-margin:0 18px;
-text-decoration:none;
-font-size:17px;
-transition:0.3s;
-}
-
-nav a:hover{color:#00c6ff}
-
-/* THEME TOGGLE */
-.toggle{
-position:fixed;
-top:15px;
-right:15px;
-background:#00c6ff;
-color:#000;
-border:none;
-padding:8px 14px;
-border-radius:20px;
-cursor:pointer;
-font-weight:bold;
-box-shadow:0 0 10px #00c6ff;
-z-index:2000;
-}
-
-/* 🎵 MUSIC PLAYER */
-.music-player{
-position:fixed;
-bottom:20px;
-left:20px;
-background:rgba(0,0,0,0.6);
-backdrop-filter:blur(12px);
-padding:12px 16px;
-border-radius:16px;
-box-shadow:0 0 20px #00c6ff;
-display:flex;
-align-items:center;
-gap:10px;
-z-index:2000;
-}
-
-.music-player button{
-background:#00c6ff;
-border:none;
-padding:6px 12px;
-border-radius:15px;
-cursor:pointer;
-font-weight:bold;
-}
-
-.music-player input[type="range"]{
-width:80px;
-}
-
-.music-name{
-font-size:12px;
-max-width:120px;
-overflow:hidden;
-white-space:nowrap;
-text-overflow:ellipsis;
-}
-
-.music-player input[type="file"]{
-display:none;
-}
+/* NAV */
+nav{background:rgba(0,0,0,.4);padding:12px;text-align:center;position:sticky;top:0}
+nav a{color:white;text-decoration:none;margin:0 14px;font-size:16px}
+nav a:hover{text-shadow:0 0 15px #00c6ff}
 
 /* SECTIONS */
 section{
-padding:50px 25px;
-max-width:900px;
-margin:40px auto;
-background:var(--glass);
-backdrop-filter:blur(14px);
-border-radius:16px;
-box-shadow:0 0 20px #00c6ff;
+  max-width:900px;margin:40px auto;padding:40px;
+  background:rgba(255,255,255,.12);
+  backdrop-filter:blur(14px);
+  border-radius:16px;
+  box-shadow:0 0 25px #00c6ff;
+  opacity:0;transform:translateY(40px);
+  transition:.8s;
+}
+section.active{opacity:1;transform:none}
+
+.skills span{display:inline-block;margin:6px;padding:10px 16px;background:#00c6ff;border-radius:20px;color:#000}
+
+.project-card{margin-top:20px;padding:20px;background:rgba(0,0,0,.5);border-radius:12px;box-shadow:0 0 18px #00c6ff}
+
+.social a{display:inline-block;margin:8px;padding:10px 18px;background:#00c6ff;border-radius:20px;color:black;text-decoration:none}
+
+/* MUSIC */
+.music-player{
+  position:fixed;bottom:20px;right:20px;
+  background:rgba(0,0,0,.6);
+  padding:15px;border-radius:16px;
+  box-shadow:0 0 25px #00c6ff
 }
 
-h2{
-margin-bottom:20px;
-border-bottom:3px solid #00c6ff;
-display:inline-block;
-}
-
-/* SKILLS */
-.skills{display:flex;flex-wrap:wrap;gap:12px}
-.skills span{
-background:#0072ff;
-padding:10px 18px;
-border-radius:25px;
-}
-
-/* PROJECTS */
-.project-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-}
-
-.project-card{
-background:rgba(0,0,0,0.55);
-padding:25px;
-border-radius:16px;
-}
-
-/* CONTACT */
-.social a{
-display:inline-block;
-background:rgba(0,0,0,0.6);
-padding:10px 18px;
-margin:8px 6px;
-border-radius:25px;
-text-decoration:none;
-color:#fff;
-}
-
-/* FOOTER */
-footer{
-text-align:center;
-padding:25px;
-background:rgba(0,0,0,0.6);
-margin-top:60px;
-color:#fff;
-}
-
-/* SCROLL REVEAL */
-.reveal{opacity:0;transform:translateY(40px);transition:0.8s}
-.reveal.active{opacity:1;transform:none}
+footer{text-align:center;padding:25px;background:rgba(0,0,0,.5)}
 </style>
 </head>
 
 <body>
 
-<button class="toggle" onclick="toggleTheme()">Toggle Theme</button>
-
-<!-- 🎵 MUSIC PLAYER -->
-<div class="music-player">
-  <button onclick="toggleMusic()">▶ / ❚❚</button>
-  <input type="range" min="0" max="1" step="0.01" onchange="setVolume(this.value)">
-  <span class="music-name" id="musicName">No Music</span>
-  <button onclick="document.getElementById('musicFile').click()">Upload</button>
-  <input type="file" id="musicFile" accept="audio/*">
-</div>
-
-<audio id="bgMusic" loop></audio>
-
 <div id="loader">
   <div class="loader-ring"></div>
-  <h2 class="loader-text">KAIZEN</h2>
+  <div class="loader-text">KAIZEN</div>
 </div>
 
-<canvas id="particleCanvas"></canvas>
+<canvas id="particles"></canvas>
 
 <header>
-  <h1><span class="kaizen" id="typing"></span></h1>
+  <h1 id="typing"></h1>
   <p>Student | Developer | Learner</p>
 
-  <!-- ✅ HEADER VISUALIZER -->
   <div class="visualizer" id="visualizer">
     <div class="bar"></div><div class="bar"></div><div class="bar"></div>
     <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-    <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div>
   </div>
 </header>
 
@@ -290,166 +97,114 @@ color:#fff;
   <a href="#contact">Contact</a>
 </nav>
 
-<section id="about" class="reveal">
-  <h2>About Me</h2>
-  <p>Hello! I'm Milan Kumar Das, a passionate learner and aspiring developer.</p>
+<section id="about">
+  <h2>About</h2>
+  <p>Hello! I'm Milan Kumar Das, a passionate learner and developer.</p>
 </section>
 
-<section id="skills" class="reveal">
+<section id="skills">
   <h2>Skills</h2>
   <div class="skills">
-    <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span><span>GitHub</span>
+    <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span>
   </div>
 </section>
 
-<section id="projects" class="reveal">
+<section id="projects">
   <h2>Projects</h2>
-  <div class="project-grid">
-    <div class="project-card">Portfolio Website</div>
-    <div class="project-card">Weather App</div>
-    <div class="project-card">Landing Page</div>
-  </div>
+  <div class="project-card">Portfolio Website</div>
+  <div class="project-card">Weather App</div>
+  <div class="project-card">Landing Page</div>
 </section>
 
-<section id="contact" class="reveal">
+<section id="contact">
   <h2>Contact</h2>
   <div class="social">
     <a href="#">GitHub</a>
     <a href="#">LinkedIn</a>
     <a href="#">xyz@gmail.com</a>
-    <a href="#">821xxxx63</a>
   </div>
 </section>
 
-<footer>
-  <p>&copy; 2025 Crown-Codes. All rights reserved.</p>
-</footer>
+<div class="music-player">
+  <input type="file" id="musicInput" accept="audio/*">
+  <audio id="audio" controls></audio>
+</div>
+
+<footer>© 2025 Crown-Codes</footer>
 
 <script>
-/* THEME TOGGLE */
-function toggleTheme(){
-document.body.classList.toggle("light");
-}
-
-/* 🎵 MUSIC + VISUALIZER SYSTEM */
-const music=document.getElementById("bgMusic");
-const musicFile=document.getElementById("musicFile");
-const musicName=document.getElementById("musicName");
-const bars=document.querySelectorAll(".bar");
-
-const audioCtx=new (window.AudioContext||window.webkitAudioContext)();
-const source=audioCtx.createMediaElementSource(music);
-const analyser=audioCtx.createAnalyser();
-analyser.fftSize=64;
-
-source.connect(analyser);
-analyser.connect(audioCtx.destination);
-
-function toggleMusic(){
-audioCtx.resume();
-if(music.paused) music.play();
-else music.pause();
-}
-
-function setVolume(v){
-music.volume=v;
-}
-
-musicFile.addEventListener("change",function(){
-const file=this.files[0];
-if(file){
-music.src=URL.createObjectURL(file);
-music.play();
-musicName.textContent=file.name;
-}
-});
-
-function animateBars(){
-const data=new Uint8Array(analyser.frequencyBinCount);
-analyser.getByteFrequencyData(data);
-
-bars.forEach((bar,i)=>{
-const value=data[i]*0.6;
-bar.style.height=Math.max(8,value)+"px";
-});
-
-requestAnimationFrame(animateBars);
-}
-animateBars();
-
 /* LOADER */
-window.addEventListener("load",()=>{
-const loader=document.getElementById("loader");
-setTimeout(()=>{loader.style.opacity="0";loader.style.display="none"},1200);
-});
+window.addEventListener("load",()=>setTimeout(()=>loader.style.display="none",1200))
 
 /* TYPING */
-const words=["KAIZEN","Student","Developer","Learner"];
-let w=0,c=0;
-const el=document.getElementById("typing");
+const words=["KAIZEN","Student","Developer","Learner"]
+let w=0,c=0,t=document.getElementById("typing")
+function type(){if(c<words[w].length){t.textContent+=words[w][c++];setTimeout(type,120)}else setTimeout(del,1200)}
+function del(){if(c>0){t.textContent=words[w].slice(0,--c);setTimeout(del,60)}else{w=(w+1)%words.length;setTimeout(type,200)}}
+type()
 
-function type(){
-if(c<words[w].length){
-el.textContent+=words[w][c++];
-setTimeout(type,120);
-}else setTimeout(erase,1000);
+/* REVEAL */
+const sections=document.querySelectorAll("section")
+window.addEventListener("scroll",()=>sections.forEach(s=>{
+  if(s.getBoundingClientRect().top<innerHeight-120)s.classList.add("active")
+}))
+
+/* ===== ✅ MOBILE PERFORMANCE MODE AUTO DETECT ===== */
+const isMobile = window.innerWidth < 768 || navigator.hardwareConcurrency <= 4;
+const particleCount = isMobile ? 30 : 80;
+const visualizerFPS = isMobile ? 30 : 60;
+
+/* PARTICLES */
+const canvas=document.getElementById("particles"),ctx=canvas.getContext("2d");
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight}
+resize();addEventListener("resize",resize)
+
+const pts=[]
+for(let i=0;i<particleCount;i++)
+  pts.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:2,s:isMobile?0.4:0.8})
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height)
+  pts.forEach(p=>{
+    p.y+=p.s;if(p.y>canvas.height)p.y=0
+    ctx.fillStyle="#00c6ff"
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()
+  })
+  requestAnimationFrame(animate)
 }
-function erase(){
-if(c>0){
-el.textContent=words[w].slice(0,--c);
-setTimeout(erase,80);
-}else{
-w=(w+1)%words.length;
-setTimeout(type,150);
-}
-}
-type();
+animate()
 
-/* ===== FPS OPTIMIZED PARTICLES ===== */
-const canvas=document.getElementById("particleCanvas");
-const ctx=canvas.getContext("2d");
+/* MUSIC + BASS VISUALIZER */
+const audio=document.getElementById("audio")
+const input=document.getElementById("musicInput")
+const bars=document.querySelectorAll(".bar")
+const audioCtx=new AudioContext()
+const analyser=audioCtx.createAnalyser()
+analyser.fftSize=isMobile ? 32 : 64
+const data=new Uint8Array(analyser.frequencyBinCount)
 
-function resize(){
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-}
-resize();
-window.addEventListener("resize",resize);
-
-let particles=[];
-const COUNT=70;
-
-for(let i=0;i<COUNT;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-vx:(Math.random()-.5)*0.6,
-vy:(Math.random()-.5)*0.6,
-r:Math.random()*2+1
-});
+input.onchange=()=>{
+  audio.src=URL.createObjectURL(input.files[0])
+  const src=audioCtx.createMediaElementSource(audio)
+  src.connect(analyser);analyser.connect(audioCtx.destination)
+  audio.play()
 }
 
-let lastTime=0;
-function animate(time){
-const delta=(time-lastTime)/16;
-lastTime=time;
+let lastFrame=0
+function viz(time){
+  if(time-lastFrame < 1000/visualizerFPS) return requestAnimationFrame(viz)
+  lastFrame=time
 
-ctx.clearRect(0,0,canvas.width,canvas.height);
-for(let p of particles){
-p.x+=p.vx*delta;
-p.y+=p.vy*delta;
-
-if(p.x<0||p.x>canvas.width) p.vx*=-1;
-if(p.y<0||p.y>canvas.height) p.vy*=-1;
-
-ctx.beginPath();
-ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-ctx.fillStyle="#00c6ff";
-ctx.fill();
+  analyser.getByteFrequencyData(data)
+  bars.forEach((bar,i)=>{
+    const v=data[i]/(isMobile?5:3)
+    bar.style.height=(v+10)+"px"
+    bar.style.background=`hsl(${v*3},100%,60%)`
+    bar.style.boxShadow=`0 0 ${isMobile?10:25}px hsl(${v*3},100%,60%)`
+  })
+  requestAnimationFrame(viz)
 }
-requestAnimationFrame(animate);
-}
-animate(0);
+viz(0)
 </script>
 
 </body>
