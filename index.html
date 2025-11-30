@@ -4,223 +4,69 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Personal Website</title>
-
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-
-    /* ================= LOADER ================= */
-    #loader { position: fixed; inset: 0; background: linear-gradient(135deg,#0f2027,#1c1c1c,#0f2027); display:flex; flex-direction:column; justify-content:center; align-items:center; z-index:9999; transition:opacity 0.6s ease;}
-    .loader-ring{width:100px;height:100px;border:8px solid rgba(255,255,255,0.1);border-top:8px solid #00c6ff;border-right:8px solid #ff00cc;border-bottom:8px solid #0072ff;border-left:8px solid #00ffcc;border-radius:50%;animation:spin 1s linear infinite;box-shadow:0 0 20px #00c6ff,0 0 40px #ff00cc,0 0 60px #0072ff;margin-bottom:20px;}
-    .loader-text{font-family:'Dancing Script',cursive;font-size:36px;letter-spacing:5px;animation:neonPulse 1.8s infinite alternate;text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 30px #0072ff;}
-    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
-    @keyframes neonPulse{0%{text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 30px #0072ff;color:#00c6ff;}50%{text-shadow:0 0 25px #00c6ff,0 0 50px #ff00cc,0 0 75px #0072ff;color:#ff00cc;}100%{text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 30px #0072ff;color:#0072ff;}}
-
-    /* ================= PARTICLE CANVAS ================= */
-    canvas{position:fixed;top:0;left:0;z-index:-2;}
-
-    /* ================= NEON BACKGROUND ================= */
-    body{font-family:"Segoe UI",Arial,sans-serif;color:#fff;line-height:1.6;background:linear-gradient(270deg,#00c6ff,#0072ff,#ff00cc,#3333ff);background-size:800% 800%;animation:neonFlow 12s ease infinite;}
-    @keyframes neonFlow{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-
-    /* ================= HEADER ================= */
-    header{background:rgba(0,0,0,0.45);backdrop-filter:blur(12px);padding:80px 20px;text-align:center;position:relative;z-index:1;}
-    header h1{font-size:48px;letter-spacing:3px;}
-    header p{margin-top:10px;font-size:18px;opacity:0.9;}
-
-    /* ================= NAVBAR ================= */
-    nav{background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);padding:12px;text-align:center;position:sticky;top:0;z-index:1000;}
-    nav a{color:#fff;margin:0 18px;text-decoration:none;font-size:17px;font-weight:500;transition:0.3s,text-shadow 0.6s ease;}
-    nav a:hover{color:#00c6ff;text-shadow:0 0 15px #00c6ff,0 0 30px #ff00cc;}
-
-    /* ================= GLASS SECTIONS ================= */
-    section{padding:50px 25px;max-width:900px;margin:40px auto;background:rgba(255,255,255,0.12);backdrop-filter:blur(14px);border-radius:16px;border:1px solid rgba(255,255,255,0.25);box-shadow:0 0 20px rgba(0,198,255,0.5),0 0 35px rgba(255,0,204,0.3);transition:0.4s ease,box-shadow 0.6s ease;position:relative;z-index:1;animation:neonShimmer 4s infinite alternate;}
-    section:hover{transform:translateY(-6px);box-shadow:0 0 25px #00c6ff,0 0 50px #ff00cc,0 0 75px #0072ff;}
-    @keyframes neonShimmer{0%{box-shadow:0 0 15px #00c6ff,0 0 25px #ff00cc,0 0 40px #0072ff;}50%{box-shadow:0 0 25px #00c6ff,0 0 45px #ff00cc,0 0 70px #0072ff;}100%{box-shadow:0 0 15px #00c6ff,0 0 25px #ff00cc,0 0 40px #0072ff;}}
-    h2{margin-bottom:20px;border-bottom:3px solid #00c6ff;display:inline-block;padding-bottom:6px;font-size:26px;}
-
-    /* ================= SKILLS ================= */
-    .skills{display:flex;flex-wrap:wrap;gap:12px;}
-    .skills span{background:linear-gradient(135deg,#00c6ff,#0072ff);color:#fff;padding:10px 18px;border-radius:25px;font-size:15px;font-weight:500;transition:0.3s;}
-    .skills span:hover{transform:scale(1.08);box-shadow:0 0 15px #00c6ff;}
-
-    /* ================= PROJECT CARDS ================= */
-    .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;margin-top:20px;}
-    .project-card{background:rgba(0,0,0,0.55);color:#fff;padding:25px;border-radius:16px;transition:0.4s ease,box-shadow 0.6s ease;cursor:pointer;position:relative;overflow:hidden;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.2);animation:cardGlow 3s infinite alternate;}
-    .project-card:hover{transform:translateY(-12px) scale(1.04);box-shadow:0 0 20px #00c6ff,0 0 40px #ff00cc,0 0 80px #0072ff;}
-    @keyframes cardGlow{0%{box-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 40px #0072ff;}50%{box-shadow:0 0 15px #00c6ff,0 0 35px #ff00cc,0 0 60px #0072ff;}100%{box-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 40px #0072ff;}}
-
-    /* ================= CONTACT ================= */
-    .social a{display:inline-block;background:rgba(0,0,0,0.6);color:#fff;padding:10px 18px;margin:8px 6px;border-radius:25px;text-decoration:none;transition:0.3s,box-shadow 0.6s ease;border:1px solid rgba(255,255,255,0.25);animation:buttonGlow 3s infinite alternate;}
-    .social a:hover{background:#00c6ff;color:#000;box-shadow:0 0 25px #00c6ff,0 0 50px #ff00cc,0 0 75px #0072ff;}
-    @keyframes buttonGlow{0%{box-shadow:0 0 8px #00c6ff,0 0 16px #ff00cc;}50%{box-shadow:0 0 15px #00c6ff,0 0 30px #ff00cc;}100%{box-shadow:0 0 8px #00c6ff,0 0 16px #ff00cc;}}
-
-    /* ================= FOOTER ================= */
-    footer{text-align:center;padding:25px;background:rgba(0,0,0,0.6);margin-top:60px;position:relative;z-index:1;}
-
-    /* ================= TYPING ================= */
-    #typing{border-right:3px solid #00c6ff;padding-right:6px;white-space:nowrap;overflow:hidden;animation:blinkCursor 0.7s infinite;font-weight:700;font-size:44px;text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc;}
-    @keyframes blinkCursor{0%,100%{border-color:transparent;}50%{border-color:#00c6ff;}}
-    .kaizen{font-family:'Dancing Script',cursive;font-weight:700;color:#00c6ff;animation:glow 1.5s infinite alternate;}
-    @keyframes glow{0%{text-shadow:0 0 6px #00c6ff;}100%{text-shadow:0 0 25px #00c6ff,0 0 50px #00c6ff;}}
-
-    /* ================= SCROLL ANIMATION ================= */
-    .reveal{opacity:0;transform:translateY(40px);transition:all 0.8s ease;}
-    .reveal.active{opacity:1;transform:translateY(0);}
-
-    /* ================= MINI NOTEPAD POPUPS ================= */
-    .notepad{
-      position:fixed;top:100px;left:100px;width:300px;height:350px;background:rgba(0,0,0,0.45);backdrop-filter:blur(14px);
-      border-radius:12px;border:1px solid rgba(255,255,255,0.25);box-shadow:0 0 20px #00c6ff,0 0 35px #ff00cc;
-      color:#fff;resize:both;overflow:auto;z-index:999;
-    }
-    .notepad header{cursor:move;background:rgba(0,0,0,0.6);padding:8px 12px;border-bottom:1px solid rgba(255,255,255,0.2);font-weight:bold;text-align:center;}
-    .notepad textarea{width:calc(100% - 20px);height:calc(100% - 50px);margin:10px;padding:8px;background:rgba(0,0,0,0.4);border:none;border-radius:8px;color:#fff;resize:none;outline:none;font-size:15px;font-family:"Segoe UI",Arial,sans-serif;box-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc;}
-    .notepad button{margin:5px;padding:6px 12px;background:#ff00cc;border:none;border-radius:8px;color:#fff;font-weight:bold;cursor:pointer;transition:0.3s;box-shadow:0 0 8px #00c6ff,0 0 15px #ff00cc;}
-    .notepad button:hover{background:#00c6ff;box-shadow:0 0 20px #00c6ff,0 0 35px #ff00cc;}
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #333; }
+    header { background: #222; color: #fff; padding: 60px 20px; text-align: center; }
+    header img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
+    nav { background: #333; padding: 12px; text-align: center; }
+    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-size: 18px; }
+    section { padding: 50px 20px; max-width: 900px; margin: auto; background: #fff; margin-top: 30px; border-radius: 8px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
+    h2 { border-bottom: 2px solid #ddd; padding-bottom: 8px; }
+    footer { text-align: center; padding: 20px; background: #222; color: #fff; margin-top: 40px; }
+    .skills span, .social a { background: #eee; padding: 8px 15px; margin: 5px; display: inline-block; border-radius: 20px; }
+    .social a { background: #333; color: #fff; }
   </style>
 </head>
 <body>
 
-  <!-- ================= LOADER ================= -->
-  <div id="loader">
-    <div class="loader-ring"></div>
-    <h2 class="loader-text">KAIZEN</h2>
-  </div>
-
-  <!-- ================= PARTICLES ================= -->
-  <canvas id="particleCanvas"></canvas>
-
-  <!-- ================= HEADER ================= -->
   <header>
-    <h1><span id="typing" class="kaizen"></span></h1>
+    <img src="https://via.placeholder.com/140" alt="Profile Photo" />
+    <h1>Your Name</h1>
     <p>Student | Developer | Learner</p>
   </header>
 
-  <!-- ================= NAVBAR ================= -->
   <nav>
     <a href="#about">About</a>
     <a href="#skills">Skills</a>
     <a href="#projects">Projects</a>
-    <a href="#" onclick="openNotepad('anime')">Anime</a>
-    <a href="#" onclick="openNotepad('manhwa')">Manhwa/Manhua</a>
     <a href="#contact">Contact</a>
   </nav>
 
-  <!-- ================= ABOUT ================= -->
-  <section id="about" class="reveal">
+  <section id="about">
     <h2>About Me</h2>
-    <p>Hello! I'm Milan Kumar Das, a passionate learner and aspiring developer.</p>
+    <p>Hello! I'm [Your Name], a passionate learner and aspiring developer. I enjoy creating websites, learning new technologies, and building digital experiences. This is my personal website where I showcase my projects, skills, and contact details.</p>
   </section>
 
-  <!-- ================= SKILLS ================= -->
-  <section id="skills" class="reveal">
+  <section id="skills">
     <h2>Skills</h2>
     <div class="skills">
       <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span><span>GitHub</span>
     </div>
   </section>
 
-  <!-- ================= PROJECTS ================= -->
-  <section id="projects" class="reveal">
+  <section id="projects">
     <h2>Projects</h2>
-    <div class="project-grid">
-      <div class="project-card"><h3>Portfolio Website</h3><p>Modern personal website design.</p></div>
-      <div class="project-card"><h3>Weather App</h3><p>Real-time weather application.</p></div>
-      <div class="project-card"><h3>Landing Page</h3><p>Responsive business landing page.</p></div>
-    </div>
+    <p>Here are some of my favorite projects:</p>
+    <ul>
+      <li><strong>Portfolio Website</strong> – A modern personal website built with HTML/CSS.</li>
+      <li><strong>Weather App</strong> – A simple app using an API to fetch real-time weather.</li>
+      <li><strong>Landing Page</strong> – Clean and responsive website layout.</li>
+    </ul>
   </section>
 
-  <!-- ================= CONTACT ================= -->
-  <section id="contact" class="reveal">
+  <section id="contact">
     <h2>Contact</h2>
+    <p>Feel free to reach me through the below platforms:</p>
     <div class="social">
       <a href="#">GitHub</a>
       <a href="#">LinkedIn</a>
-      <a href="#">xyz@gmail.com</a>
-      <a href="#">821xxxx63</a>
+      <a href="#">Email</a>
     </div>
   </section>
 
-  <!-- ================= MINI NOTEPADS ================= -->
-  <div id="anime" class="notepad" style="display:none;">
-    <header>Anime Notes</header>
-    <textarea placeholder="Type your anime notes here..."></textarea>
-    <button onclick="clearNotes('anime')">Clear</button>
-  </div>
-
-  <div id="manhwa" class="notepad" style="display:none;left:450px;">
-    <header>Manhwa/Manhua Notes</header>
-    <textarea placeholder="Type your Manhwa/Manhua notes here..."></textarea>
-    <button onclick="clearNotes('manhwa')">Clear</button>
-  </div>
-
-  <!-- ================= FOOTER ================= -->
   <footer>
-    <p>&copy; 2025 Crown-Codes. All rights reserved.</p>
+    <p>&copy; 2025 Your Name. All rights reserved.</p>
   </footer>
-
-  <!-- ================= SCRIPTS ================= -->
-  <script>
-    // ================= LOADER =================
-    window.addEventListener("load", () => {
-      const loader = document.getElementById("loader");
-      setTimeout(()=>{loader.style.opacity="0";setTimeout(()=>loader.style.display="none",600);},1800);
-    });
-
-    // ================= SCROLL REVEAL =================
-    function revealOnScroll(){document.querySelectorAll(".reveal").forEach(el=>{if(el.getBoundingClientRect().top<window.innerHeight-120){el.classList.add("active");}});}
-    window.addEventListener("scroll",revealOnScroll);
-    revealOnScroll();
-
-    // ================= TYPING =================
-    const words=["KAIZEN","Student","Developer","Learner"];
-    let wordIndex=0,charIndex=0;
-    const typingElement=document.getElementById("typing");
-    function typeLoop(){if(charIndex<words[wordIndex].length){typingElement.textContent+=words[wordIndex].charAt(charIndex++);setTimeout(typeLoop,120);}else{setTimeout(deleteLoop,1000);}}
-    function deleteLoop(){if(charIndex>0){typingElement.textContent=words[wordIndex].substring(0,--charIndex);setTimeout(deleteLoop,80);}else{wordIndex=(wordIndex+1)%words.length;setTimeout(typeLoop,150);}}
-    typeLoop();
-
-    // ================= PARTICLES =================
-    const canvas=document.getElementById("particleCanvas");
-    const ctx=canvas.getContext("2d");
-    function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
-    window.addEventListener("resize",resize);resize();
-    const particles=[];
-    for(let i=0;i<100;i++){particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-0.5)*1.5,dy:(Math.random()-0.5)*1.5,color:`hsl(${Math.random()*360},100%,60%)`});}
-    function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle=p.color;ctx.shadowBlur=12;ctx.shadowColor=p.color;ctx.fill();});requestAnimationFrame(animate);}
-    animate();
-
-    // ================= MINI NOTEPADS =================
-    const animeTextarea=document.querySelector("#anime textarea");
-    const manhwaTextarea=document.querySelector("#manhwa textarea");
-    animeTextarea.value=localStorage.getItem("animeNotes")||"";
-    manhwaTextarea.value=localStorage.getItem("manhwaNotes")||"";
-    animeTextarea.addEventListener("input",()=>{localStorage.setItem("animeNotes",animeTextarea.value);});
-    manhwaTextarea.addEventListener("input",()=>{localStorage.setItem("manhwaNotes",manhwaTextarea.value);});
-
-    function clearNotes(sectionId){if(sectionId==='anime'){animeTextarea.value="";localStorage.removeItem("animeNotes");}else if(sectionId==='manhwa'){manhwaTextarea.value="";localStorage.removeItem("manhwaNotes");}}
-
-    function openNotepad(id){document.getElementById(id).style.display="block";}
-
-    // ================= DRAG FUNCTIONALITY =================
-    document.querySelectorAll(".notepad").forEach(popup=>{
-      const header=popup.querySelector("header");
-      let isDragging=false,offsetX=0,offsetY=0;
-      header.addEventListener("mousedown",e=>{
-        isDragging=true;
-        offsetX=e.clientX-popup.offsetLeft;
-        offsetY=e.clientY-popup.offsetTop;
-      });
-      window.addEventListener("mousemove",e=>{
-        if(isDragging){popup.style.left=(e.clientX-offsetX)+"px";popup.style.top=(e.clientY-offsetY)+"px";}
-      });
-      window.addEventListener("mouseup",()=>{isDragging=false;});
-    });
-  </script>
 
 </body>
 </html>
-
