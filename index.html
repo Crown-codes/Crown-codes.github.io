@@ -4,23 +4,106 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>My Personal Website</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f5f5f5; color: #333; }
-    header { background: #222; color: #fff; padding: 60px 20px; text-align: center; }
-    header img { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px; }
-    nav { background: #333; padding: 12px; text-align: center; }
-    nav a { color: #fff; margin: 0 15px; text-decoration: none; font-size: 18px; }
-    section { padding: 50px 20px; max-width: 900px; margin: auto; background: #fff; margin-top: 30px; border-radius: 8px; box-shadow: 0 0 12px rgba(0,0,0,0.08); }
-    h2 { border-bottom: 2px solid #ddd; padding-bottom: 8px; }
-    footer { text-align: center; padding: 20px; background: #222; color: #fff; margin-top: 40px; }
-    .skills span, .social a { background: #eee; padding: 8px 15px; margin: 5px; display: inline-block; border-radius: 20px; }
-    .social a { background: #333; color: #fff; }
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+    /* Loader */
+    #loader {
+      position: fixed; inset: 0;
+      background: linear-gradient(135deg,#0f2027,#1c1c1c,#0f2027);
+      display:flex; flex-direction:column; justify-content:center; align-items:center;
+      z-index:9999; transition:opacity 0.6s ease;
+    }
+    .loader-ring{
+      width:100px;height:100px;border:8px solid rgba(255,255,255,0.1);
+      border-top:8px solid #00c6ff;border-right:8px solid #ff00cc;
+      border-bottom:8px solid #0072ff;border-left:8px solid #00ffcc;
+      border-radius:50%;animation:spin 1s linear infinite;
+      box-shadow:0 0 20px #00c6ff,0 0 40px #ff00cc,0 0 60px #0072ff;margin-bottom:20px;
+    }
+    .loader-text{
+      font-family:'Dancing Script',cursive;font-size:36px;letter-spacing:5px;
+      animation:neonPulse 1.8s infinite alternate;
+      text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 30px #0072ff;
+    }
+    @keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+    @keyframes neonPulse{
+      0%{text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 30px #0072ff;color:#00c6ff;}
+      50%{text-shadow:0 0 25px #00c6ff,0 0 50px #ff00cc,0 0 75px #0072ff;color:#ff00cc;}
+      100%{text-shadow:0 0 10px #00c6ff,0 0 20px #ff00cc,0 0 30px #0072ff;color:#0072ff;}
+    }
+
+    canvas{position:fixed;top:0;left:0;z-index:-2;}
+
+    /* Body + Neon Background */
+    body{
+      font-family:"Segoe UI",Arial,sans-serif;color:#fff;line-height:1.6;
+      background:linear-gradient(270deg,#00c6ff,#0072ff,#ff00cc,#3333ff);
+      background-size:800% 800%;
+      animation:neonFlow 12s ease infinite;
+      will-change: background-position;
+    }
+    @keyframes neonFlow{
+      0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}
+    }
+
+    header{
+      background:rgba(0,0,0,0.45);backdrop-filter:blur(12px);
+      padding:80px 20px;text-align:center;position:relative;z-index:1;
+    }
+    header h1{font-size:48px;letter-spacing:3px;}
+    header p{margin-top:10px;font-size:18px;opacity:0.9;}
+
+    nav{
+      background:rgba(0,0,0,0.4);backdrop-filter:blur(12px);
+      padding:12px;text-align:center;position:sticky;top:0;z-index:1000;
+    }
+    nav a{color:#fff;margin:0 18px;text-decoration:none;font-size:17px;font-weight:500;transition:0.3s;}
+
+    section{
+      padding:50px 25px;max-width:900px;margin:40px auto;
+      background:rgba(255,255,255,0.12);backdrop-filter:blur(14px);
+      border-radius:16px;border:1px solid rgba(255,255,255,0.25);
+    }
+
+    .skills span{background:linear-gradient(135deg,#00c6ff,#0072ff);padding:10px 18px;border-radius:25px;}
+
+    .project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;}
+    .project-card{
+      background:rgba(0,0,0,0.55);
+      padding:25px;border-radius:16px;
+      transition:0.3s, box-shadow 0.3s;
+    }
+    .project-card:hover{
+      box-shadow:0 0 20px #00c6ff,0 0 40px #ff00cc,0 0 60px #0072ff;
+      transform:translateY(-5px);
+    }
+
+    .social a{display:inline-block;background:rgba(0,0,0,0.6);padding:10px 18px;margin:8px 6px;border-radius:25px;}
+    footer{text-align:center;padding:25px;background:rgba(0,0,0,0.6);margin-top:60px;}
+
+    #typing{border-right:3px solid #00c6ff;padding-right:6px;font-weight:700;font-size:44px;}
+    .kaizen{font-family:'Dancing Script',cursive;color:#00c6ff;}
+
+    /* Reveal sections */
+    .reveal{opacity:0;transform:translateY(40px);transition:all 0.8s ease;}
+    .reveal.active{opacity:1;transform:translateY(0);}
   </style>
 </head>
 <body>
 
+  <div id="loader">
+    <div class="loader-ring"></div>
+    <h2 class="loader-text">KAIZEN</h2>
+  </div>
+
+  <canvas id="particleCanvas"></canvas>
+
   <header>
-    <h1>KAIZEN</h1>
+    <h1><span id="typing" class="kaizen"></span></h1>
     <p>Student | Developer | Learner</p>
   </header>
 
@@ -31,43 +114,108 @@
     <a href="#contact">Contact</a>
   </nav>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p>Hello! I'm Milan Kumar Das, a passionate learner and aspiring developer. I enjoy creating websites, learning new technologies, and building digital experiences. This is my personal website where I showcase my projects, skills, and contact details.</p>
-  </section>
-
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills">
-      <span>HTML</span><span>CSS</span><span>JavaScript</span><span>Python</span><span>GitHub</span>
+  <section id="about" class="reveal"><h2>About Me</h2><p>Hello! I'm Milan Kumar Das.</p></section>
+  <section id="skills" class="reveal"><h2>Skills</h2><div class="skills"><span>HTML</span><span>CSS</span><span>JavaScript</span></div></section>
+  <section id="projects" class="reveal"><h2>Projects</h2>
+    <div class="project-grid">
+      <div class="project-card">Portfolio</div>
+      <div class="project-card">Project 2</div>
+      <div class="project-card">Project 3</div>
     </div>
   </section>
+  <section id="contact" class="reveal"><h2>Contact</h2></section>
 
-  <section id="projects">
-    <h2>Projects</h2>
-    <p>Here are some of my favorite projects:</p>
-    <ul>
-      <li><strong>Portfolio Website</strong> – A modern personal website built with HTML/CSS.</li>
-      <li><strong>Weather App</strong> – A simple app using an API to fetch real-time weather.</li>
-      <li><strong>Landing Page</strong> – Clean and responsive website layout.</li>
-    </ul>
-  </section>
+  <footer>&copy; 2025 Crown-Codes.</footer>
 
-  <section id="contact">
-    <h2>Contact</h2>
-    <p>Feel free to reach me through the below platforms:</p>
-    <div class="social">
-      <a href="#">GitHub</a>
-      <a href="#">LinkedIn</a>
-      <a href="#">xyz@gmail.com</a>
-      <a href="#">821xxxxx63</a>
-    </div>
-  </section>
+  <script>
+    // Loader
+    window.addEventListener("load", () => {
+      const loader = document.getElementById("loader");
+      setTimeout(()=>{loader.style.opacity="0";setTimeout(()=>loader.style.display="none",600);},1800);
+    });
 
-  <footer>
-    <p>&copy; 2025 Crown-Codes. All rights reserved.</p>
-  </footer>
+    // Typing animation
+    const words=["KAIZEN","Student","Developer","Learner"];
+    let wordIndex=0,charIndex=0;
+    const typingElement=document.getElementById("typing");
+
+    function typeLoop(){
+      if(charIndex<words[wordIndex].length){
+        typingElement.textContent+=words[wordIndex].charAt(charIndex++);
+        typingElement.style.color = `hsl(${(charIndex*30)%360},100%,60%)`; // synced color
+        setTimeout(typeLoop,120);
+      } else {
+        setTimeout(deleteLoop,1000);
+      }
+    }
+    function deleteLoop(){
+      if(charIndex>0){
+        typingElement.textContent=words[wordIndex].substring(0,--charIndex);
+        typingElement.style.color = `hsl(${(charIndex*30)%360},100%,60%)`;
+        setTimeout(deleteLoop,80);
+      } else {
+        wordIndex=(wordIndex+1)%words.length;
+        setTimeout(typeLoop,150);
+      }
+    }
+    typeLoop();
+
+    // Particle canvas
+    const canvas=document.getElementById("particleCanvas");
+    const ctx=canvas.getContext("2d");
+
+    let isMobile = window.innerWidth <= 768;
+    let particleCount = isMobile ? 30 : 100;
+    let shadowPower = isMobile ? 0 : 12;
+
+    function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+    window.addEventListener("resize",()=>{isMobile = window.innerWidth <= 768; resize();});
+    resize();
+
+    const particles=[];
+    for(let i=0;i<particleCount;i++){
+      particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2+1,
+        dx:(Math.random()-0.5)*1.2,
+        dy:(Math.random()-0.5)*1.2,
+        color:`hsl(${Math.random()*360},100%,60%)`
+      });
+    }
+
+    function animate(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      particles.forEach(p=>{
+        p.x+=p.dx; p.y+=p.dy;
+        if(p.x<0||p.x>canvas.width)p.dx*=-1;
+        if(p.y<0||p.y>canvas.height)p.dy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=p.color;
+        ctx.shadowBlur=shadowPower;
+        ctx.shadowColor=p.color;
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Reveal sections on scroll
+    function revealSections() {
+      const reveals = document.querySelectorAll('.reveal');
+      const windowHeight = window.innerHeight;
+
+      reveals.forEach(section => {
+        const elementTop = section.getBoundingClientRect().top;
+        const revealPoint = 150; 
+        if (elementTop < windowHeight - revealPoint) section.classList.add('active');
+        else section.classList.remove('active');
+      });
+    }
+    window.addEventListener('scroll', revealSections);
+    revealSections(); // trigger on page load
+  </script>
 
 </body>
 </html>
-
