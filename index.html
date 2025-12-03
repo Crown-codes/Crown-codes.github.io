@@ -77,6 +77,45 @@
       margin:5px;
       display:inline-block;
     }
+    /* ✅ Metallic Glow Effect for Tech Pills */
+.tech, .skill, .tag, .tech-stack span, .project-tags span {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  color: #f0f0f0;
+  background: linear-gradient(135deg, #2a2a2a, #4a4a4a);
+  border: 1px solid rgba(255,255,255,0.5);
+  box-shadow: 
+    0 0 6px rgba(255,255,255,0.4),
+    inset 0 0 6px rgba(255,255,255,0.2);
+  transition: all 0.35s ease;
+  cursor: default;
+}
+
+/* ✨ Hover Glow Boost */
+.tech:hover, 
+.skill:hover, 
+.tag:hover, 
+.tech-stack span:hover, 
+.project-tags span:hover {
+  background: linear-gradient(135deg, #f0f0f0, #ffffff);
+  color: #000;
+  box-shadow:
+    0 0 12px silver,
+    0 0 28px silver;
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ⚡ Press effect */
+.tech:active, 
+.skill:active, 
+.tag:active {
+  transform: scale(0.95);
+}
+
 
     .project-grid{
       display:grid;
@@ -246,10 +285,10 @@ a:active {
 <section id="skills">
   <h2>Skills</h2>
   <div class="skills">
-    <span>HTML</span>
-    <span>CSS</span>
-    <span>JavaScript</span>
-    <span>UI Design</span>
+    <span class="tech">HTML</span>
+    <span class="tech">CSS</span>
+    <span class="tech">JavaScript</span>
+    <span class="tech">UI Design</span>
   </div>
 </section>
 
@@ -289,7 +328,7 @@ a:active {
     <div class="contact-info" style="margin-top:20px;">
       <p><strong>Email:</strong> <a href="mailto:dasmil5048@gmail.com">dasmil5048@gmail.com</a></p>
       <p><strong>Phone:</strong> <a href="tel:+918210161263">+91 82101 61263</a></p>
-      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/MilanKumarDas" target="_blank">linkedin.com/in/MilanKumarDas</a></p>
+      <p><strong>LinkedIn:</strong> <a href="https://www.linkedin.com/in/milankumardas" target="_blank">linkedin.com/in/milankumardas</a></p>
       <p><strong>GitHub:</strong> <a href="https://github.com/Crown-codes" target="_blank">github.com/Crown-code</a></p>
     </div>
 
@@ -337,6 +376,7 @@ type();
 
 </body>
 </html>
+
 
 
 
