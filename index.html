@@ -160,6 +160,27 @@
       padding:30px;
       background:rgba(0,0,0,.6);
     }
+    /* ✅ FORCE ALL LINKS TO GOLD */
+a, 
+nav a, 
+.project-card a, 
+#contact a, 
+.social a {
+  color: gold !important;
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+/* ✅ GOLD HOVER GLOW */
+a:hover,
+nav a:hover,
+.project-card a:hover,
+#contact a:hover,
+.social a:hover {
+  color: #ffdd55 !important;
+  text-shadow: 0 0 12px gold;
+}
+
   </style>
 </head>
 
@@ -287,6 +308,7 @@ type();
 
 </body>
 </html>
+
 
 
 
