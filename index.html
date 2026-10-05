@@ -969,7 +969,308 @@ footer{
   }
 
 }
-  
+/* =========================================================
+   ABOUT — KAIZEN IDENTITY
+   ========================================================= */
+
+.about-section{
+  padding:60px;
+}
+
+.about-label{
+  display:flex;
+  align-items:center;
+  gap:12px;
+
+  margin-bottom:45px;
+
+  color:#77777e;
+
+  font-size:11px;
+  font-weight:600;
+
+  letter-spacing:3px;
+  text-transform:uppercase;
+}
+
+.about-label span{
+  color:var(--accent);
+
+  font-size:12px;
+
+  padding-right:12px;
+
+  border-right:1px solid rgba(155,124,255,.35);
+}
+
+.about-content{
+  display:grid;
+
+  grid-template-columns:
+    minmax(0,1.6fr)
+    minmax(180px,.7fr);
+
+  gap:70px;
+
+  align-items:center;
+}
+
+.about-main h2{
+  margin-bottom:28px;
+
+  font-size:clamp(42px,6vw,72px);
+
+  font-weight:800;
+
+  letter-spacing:-3px;
+
+  line-height:1;
+}
+
+.about-main h2 span{
+  color:transparent;
+
+  -webkit-text-stroke:1px rgba(155,124,255,.75);
+
+  text-shadow:
+    0 0 30px rgba(155,124,255,.12);
+}
+
+.about-main h3{
+  margin-bottom:25px;
+
+  font-size:clamp(21px,3vw,34px);
+
+  font-weight:700;
+
+  line-height:1.2;
+
+  letter-spacing:-1px;
+
+  color:#eeeeef;
+}
+
+.about-main p{
+  max-width:650px;
+
+  margin-bottom:12px;
+
+  color:#99999f;
+
+  font-size:15px;
+
+  line-height:1.9;
+}
+
+.about-signature{
+  margin-top:38px;
+
+  padding-top:22px;
+
+  border-top:1px solid rgba(255,255,255,.08);
+
+  color:#77777e;
+
+  font-size:10px;
+
+  font-weight:600;
+
+  letter-spacing:3px;
+}
+
+.about-signature span{
+  color:var(--accent);
+
+  margin:0 7px;
+
+  text-shadow:
+    0 0 12px rgba(155,124,255,.7);
+}
+
+/* Identity panel */
+
+.about-identity{
+  min-height:390px;
+
+  position:relative;
+
+  display:flex;
+
+  flex-direction:column;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.008)
+    );
+
+  border:1px solid rgba(255,255,255,.08);
+
+  border-radius:22px;
+
+  overflow:hidden;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.06),
+    0 25px 60px rgba(0,0,0,.3);
+}
+
+/* subtle grid */
+
+.about-identity::before{
+  content:"";
+
+  position:absolute;
+  inset:0;
+
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255,255,255,.025) 1px,
+      transparent 1px
+    );
+
+  background-size:35px 35px;
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      black,
+      transparent
+    );
+
+  pointer-events:none;
+}
+
+.identity-glow{
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  background:rgba(155,124,255,.12);
+
+  filter:blur(70px);
+
+  border-radius:50%;
+}
+
+.identity-text{
+  position:relative;
+
+  z-index:2;
+
+  font-size:42px;
+
+  font-weight:800;
+
+  line-height:.78;
+
+  letter-spacing:5px;
+
+  text-align:center;
+
+  color:transparent;
+
+  -webkit-text-stroke:1px rgba(255,255,255,.45);
+
+  text-shadow:
+    0 0 30px rgba(155,124,255,.12);
+}
+
+.identity-line{
+  position:relative;
+
+  z-index:2;
+
+  width:35px;
+  height:1px;
+
+  margin:25px 0;
+
+  background:var(--accent);
+
+  box-shadow:
+    0 0 15px rgba(155,124,255,.8);
+}
+
+.identity-small{
+  position:relative;
+
+  z-index:2;
+
+  color:#77777e;
+
+  font-size:9px;
+
+  font-weight:600;
+
+  letter-spacing:3px;
+
+  line-height:1.8;
+
+  text-align:center;
+}
+
+/* Hover */
+
+.about-identity{
+  transition:var(--transition);
+}
+
+.about-identity:hover{
+  border-color:rgba(155,124,255,.25);
+
+  transform:translateY(-5px);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 30px 70px rgba(0,0,0,.5),
+    0 0 35px rgba(155,124,255,.07);
+}
+
+.about-identity:hover .identity-text{
+  -webkit-text-stroke-color:rgba(155,124,255,.8);
+}
+
+/* Mobile */
+
+@media(max-width:700px){
+
+  .about-section{
+    padding:35px 22px;
+  }
+
+  .about-content{
+    grid-template-columns:1fr;
+
+    gap:45px;
+  }
+
+  .about-main h2{
+    font-size:48px;
+
+    letter-spacing:-2px;
+  }
+
+  .about-main h3{
+    font-size:23px;
+  }
+
+  .about-identity{
+    min-height:300px;
+  }
+
+}
   </style>
 </head>
 
@@ -987,9 +1288,62 @@ footer{
   <a href="#contact">Contact</a>
 </nav>
 
-<section id="about">
-  <h2>About Me</h2>
-  <p>Hello! I’m Milan Kumar Das, a passionate student developer who loves futuristic neon UI and creative web design.</p>
+<section id="about" class="about-section">
+
+  <div class="about-label">
+    <span>01</span>
+    ABOUT
+  </div>
+
+  <div class="about-content">
+
+    <div class="about-main">
+      <h2>I AM <span>KAIZEN.</span></h2>
+
+      <h3>
+        I DON'T JUST BUILD WEBSITES.<br>
+        I LIKE BUILDING EXPERIENCES.
+      </h3>
+
+      <p>
+        I'm a student developer who enjoys turning ideas into
+        things that actually feel alive.
+      </p>
+
+      <p>
+        From experimenting with code to designing interfaces,
+        I'm always curious about what I can create next.
+      </p>
+
+      <div class="about-signature">
+        CODE <span>•</span> DESIGN <span>•</span>
+        EXPERIMENT <span>•</span> CREATE
+      </div>
+    </div>
+
+    <div class="about-identity">
+      <div class="identity-glow"></div>
+
+      <div class="identity-text">
+        K<br>
+        A<br>
+        I<br>
+        Z<br>
+        E<br>
+        N
+      </div>
+
+      <div class="identity-line"></div>
+
+      <div class="identity-small">
+        CREATE<br>
+        WITHOUT<br>
+        LIMITS.
+      </div>
+    </div>
+
+  </div>
+
 </section>
 
 <section id="skills">
