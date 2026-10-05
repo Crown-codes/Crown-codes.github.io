@@ -1412,12 +1412,7 @@ footer{
         <p><strong>Technologies:</strong> HTML, CSS, JavaScript, OpenWeather API</p>
         <a href="#"
    class="view-project-btn"
-   onclick="event.preventDefault(); showNotification(
-     'PROJECT STATUS',
-     'Waiting for the weather... literally. 🌧️',
-     'Apparently, even the clouds haven't finished the API call. 💀',
-     'fas fa-cloud-sun'
-   )">
+   onclick="weatherNotice(event)">
    View Project 🚀
 </a>
       </div>
@@ -1529,6 +1524,17 @@ function youtubeNotice(event){
     "The channel is still loading... 🎬",
     "Apparently, even the algorithm needs some time to cook. 💀",
     "fab fa-youtube"
+  );
+}
+function weatherNotice(event){
+
+  event.preventDefault();
+
+  showNotification(
+    "PROJECT STATUS",
+    "Waiting for the weather... literally. 🌧️",
+    "Apparently, even the clouds haven't finished the API call. 💀",
+    "fas fa-cloud-sun"
   );
 }
 </script>
