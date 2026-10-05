@@ -1521,6 +1521,16 @@ function closeNotification(){
     .getElementById("site-notification")
     .classList.remove("show");
 }
+function youtubeNotice(event){
+  event.preventDefault();
+
+  showNotification(
+    "YOUTUBE",
+    "The channel is still loading... 🎬",
+    "Apparently, even the algorithm needs some time to cook. 💀",
+    "fab fa-youtube"
+  );
+}
 </script>
 <div id="site-notification" class="site-notification">
 
