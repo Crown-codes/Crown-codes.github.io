@@ -831,20 +831,20 @@ footer{
   }
 }
 /* =========================================================
-   YOUTUBE NOTIFICATION
+   UNIVERSAL NOTIFICATION
    ========================================================= */
 
-.youtube-notification{
+.site-notification{
   position:fixed;
 
   right:25px;
-  bottom:90px;
+  bottom:25px;
 
-  width:340px;
+  width:360px;
 
   display:flex;
-  align-items:flex-start;
-  gap:14px;
+  align-items:center;
+  gap:15px;
 
   padding:18px;
 
@@ -852,18 +852,18 @@ footer{
     linear-gradient(
       145deg,
       rgba(25,25,30,.96),
-      rgba(10,10,13,.96)
+      rgba(10,10,12,.96)
     );
 
   border:1px solid rgba(155,124,255,.35);
+
   border-radius:16px;
 
-  box-shadow:
-    0 20px 50px rgba(0,0,0,.6),
-    0 0 30px rgba(155,124,255,.10);
+  backdrop-filter:blur(18px);
 
-  backdrop-filter:blur(20px);
-  -webkit-backdrop-filter:blur(20px);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,.55),
+    0 0 30px rgba(155,124,255,.12);
 
   transform:translateX(120%);
   opacity:0;
@@ -871,13 +871,13 @@ footer{
   pointer-events:none;
 
   transition:
-    transform .4s cubic-bezier(.2,.8,.2,1),
-    opacity .3s ease;
+    transform .45s cubic-bezier(.2,.8,.2,1),
+    opacity .35s ease;
 
-  z-index:10000;
+  z-index:9999;
 }
 
-.youtube-notification.show{
+.site-notification.show{
   transform:translateX(0);
   opacity:1;
   pointer-events:auto;
@@ -893,16 +893,16 @@ footer{
   align-items:center;
   justify-content:center;
 
+  color:var(--accent);
+
+  background:rgba(155,124,255,.10);
+
+  border:1px solid rgba(155,124,255,.25);
+
   border-radius:12px;
 
-  color:#ff4b4b;
-
-  background:rgba(255,255,255,.05);
-
-  border:1px solid rgba(255,255,255,.10);
-
   box-shadow:
-    0 0 20px rgba(255,50,50,.08);
+    0 0 20px rgba(155,124,255,.12);
 }
 
 .notification-content{
@@ -914,46 +914,66 @@ footer{
 
   margin-bottom:4px;
 
-  color:white;
+  color:#f5f5f5;
 
-  font-size:14px;
+  font-size:13px;
+
+  letter-spacing:1px;
 }
 
 .notification-content p{
   margin:0 0 5px;
 
-  color:#ddd;
+  color:#cfcfd4;
 
   font-size:13px;
 }
 
 .notification-content span{
-  display:block;
+  color:#77777e;
 
-  color:#888;
+  font-size:10px;
 
-  font-size:11px;
-
-  line-height:1.5;
+  letter-spacing:.7px;
 }
 
-.youtube-notification button{
+.site-notification button{
+  align-self:flex-start;
+
+  padding:0;
+
   border:none;
+
   background:none;
 
-  color:#777;
+  color:#77777e;
 
   font-size:20px;
 
   cursor:pointer;
 
-  line-height:1;
-
-  transition:.25s;
+  transition:.25s ease;
 }
 
-.youtube-notification button:hover{
-  color:white;
+.site-notification button:hover{
+  color:#fff;
+
+  transform:rotate(90deg);
+}
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+  .site-notification{
+    left:15px;
+    right:15px;
+    bottom:15px;
+
+    width:auto;
+  }
+
 }
 
 /* Mobile */
@@ -1291,7 +1311,7 @@ footer{
 <section id="about" class="about-section">
 
   <div class="about-label">
-    <span>01</span>
+    <span>KC</span>
     ABOUT
   </div>
 
@@ -1367,19 +1387,39 @@ footer{
         <p><strong>Technologies:</strong> HTML, CSS, JavaScript</p>
         <a href="https://crown-codes.github.io" class="view-project-btn">This Project 🚀</a>
       </div>
+      
       <div class="project-card">
         <img src="https://img.icons8.com/color/48/000000/task.png" alt="Task Icon"/>
         <h3>Task Manager App</h3>
         <p>A productivity app to track tasks, deadlines, and priorities efficiently.</p>
         <p><strong>Technologies:</strong> HTML, CSS, JavaScript, Local Storage</p>
-        <a href="https://crown-codes.github.io/TaskManager" class="view-project-btn">View Project 🚀</a>
+        <a href="#"
+   class="view-project-btn"
+   onclick="event.preventDefault(); showNotification(
+     'PROJECT STATUS',
+     'Still in the laboratory. 🧪',
+     'The tasks are currently managing themselves. 💀',
+     'fas fa-code'
+   )">
+   View Project 🚀
+</a>
       </div>
+      
       <div class="project-card">
         <img src="https://img.icons8.com/color/48/000000/cloud.png" alt="Weather Icon"/>
         <h3>Weather Dashboard</h3>
         <p>A web app to check weather updates of any city with real-time API data.</p>
         <p><strong>Technologies:</strong> HTML, CSS, JavaScript, OpenWeather API</p>
-        <a href="https://crown-codes.github.io/Weather-app" class="view-project-btn">View Project 🚀</a>
+        <a href="#"
+   class="view-project-btn"
+   onclick="event.preventDefault(); showNotification(
+     'PROJECT STATUS',
+     'Waiting for the weather... literally. 🌧️',
+     'Apparently, even the clouds haven't finished the API call. 💀',
+     'fas fa-cloud-sun'
+   )">
+   View Project 🚀
+</a>
       </div>
     </div>
 
@@ -1448,36 +1488,60 @@ function erase(){
   }
 }
 type();
-function youtubeNotice(event){
-  event.preventDefault();
+function showNotification(title, message, detail, icon = "fas fa-circle-info"){
 
-  const notification = document.getElementById("youtube-notification");
+  const notification =
+    document.getElementById("site-notification");
+
+  document.getElementById("notification-title").textContent =
+    title;
+
+  document.getElementById("notification-message").textContent =
+    message;
+
+  document.getElementById("notification-detail").textContent =
+    detail;
+
+  document.getElementById("notification-icon").className =
+    icon;
 
   notification.classList.add("show");
 
-  setTimeout(() => {
+  clearTimeout(window.notificationTimer);
+
+  window.notificationTimer = setTimeout(() => {
     notification.classList.remove("show");
   }, 5000);
 }
 
-function closeYoutubeNotice(){
+
+function closeNotification(){
+
   document
-    .getElementById("youtube-notification")
+    .getElementById("site-notification")
     .classList.remove("show");
 }
 </script>
-<div id="youtube-notification" class="youtube-notification">
+<div id="site-notification" class="site-notification">
+
   <div class="notification-icon">
-    <i class="fab fa-youtube"></i>
+    <i id="notification-icon" class="fas fa-circle-info"></i>
   </div>
 
   <div class="notification-content">
-    <strong>YouTube</strong>
-    <p>No channel here... yet.</p>
-    <span>Apparently, Kaizen hasn't entered the YouTube arc yet. 💀</span>
+    <strong id="notification-title">Notification</strong>
+
+    <p id="notification-message">
+      Something happened.
+    </p>
+
+    <span id="notification-detail">
+      Crown-Codes // System
+    </span>
   </div>
 
-  <button onclick="closeYoutubeNotice()">×</button>
+  <button onclick="closeNotification()">×</button>
+
 </div>
 </body>
 </html>
